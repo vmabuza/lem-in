@@ -14,7 +14,6 @@
 
 size_t	ft_digit_count(int n)
 {
-	int	remainder;
 	int	i;
 
 	i = 0;
@@ -22,7 +21,6 @@ size_t	ft_digit_count(int n)
 		i++;
 	while (n > 0 || n < 0)
 	{
-		remainder = n % 10;
 		n = n / 10;
 		i++;
 	}

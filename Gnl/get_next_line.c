@@ -56,5 +56,5 @@ int			get_next_line(const int fd, char **line)
 	if (ret < BUFF_SIZE && !ft_strlen(fd_arr[fd]))
 		return (0);
 	fd_arr[fd] = ft_readline(fd_arr[fd], line);
-	return (1);
+return (1);
 }
