@@ -3,61 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mduma <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 11:40:14 by mduma             #+#    #+#             */
-/*   Updated: 2019/06/11 13:23:55 by mduma            ###   ########.fr       */
+/*   Created: 2019/06/13 10:40:06 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/27 14:51:57 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		ft_count_words(const char *s, char c)
+static	size_t	word_count(const char *str, char c)
 {
-	int get;
-	int get_temp;
+	size_t	count;
+	size_t	ans;
 
-	get_temp = 0;
-	get = 0;
-	while (*s)
+	ans = 0;
+	count = 0;
+	while (str[count] != '\0')
 	{
-		if (get_temp == 1 && *s == c)
-			get_temp = 0;
-		if (get_temp == 0 && *s != c)
+		while (str[count] == c && str[count] != '\0')
+			count++;
+		if (str[count] != c && str[count] != '\0')
 		{
-			get_temp = 1;
-			get++;
+			ans++;
+			while (str[count] != c && str[count] != '\0')
+				count++;
 		}
-		s++;
 	}
-	return (get);
+	return (ans);
+}
+
+static	size_t	letter_count(const char *s, char c)
+{
+	size_t	count;
+
+	count = 0;
+	while (s[count] != '\0' && s[count] != c)
+		count++;
+	return (count);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	int		get;
-	char	**tab;
-	int		a;
-	int		b;
-	int		start;
+	char	**str;
+	size_t	words;
+	size_t	i;
+	size_t	j;
 
-	if ((s == 0) || (c == 0))
-		return (NULL);
-	get = ft_count_words(s, c);
-	if (!(tab = malloc((sizeof(char *) * (get + 1)))))
-		return (NULL);
-	a = 0;
-	b = -1;
-	while (++b < get)
+	i = 0;
+	j = 0;
+	if (!s)
+		return (0);
+	words = word_count((char *)s, c);
+	if (!(str = (char **)malloc(sizeof(char *) * (words + 1))))
+		return (0);
+	while (s[i] != '\0')
 	{
-		while (s[a] && s[a] == c)
-			a++;
-		start = a;
-		while (s[a] && s[a] != c)
-			a++;
-		tab[b] = ft_strsub(s, start, a - start);
-		a++;
+		if (s[i] != '\0' && s[i] != c)
+		{
+			str[j] = ft_strsub(s, i, letter_count((char*)&s[i], c));
+			j++;
+			i = i + letter_count((char*)&s[i], c);
+		}
+		while (s[i] == c && s[i] != '\0')
+			i++;
 	}
-	tab[b] = NULL;
-	return (tab);
+	str[j] = NULL;
+	return (str);
 }

@@ -3,40 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mduma <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 13:03:31 by mduma             #+#    #+#             */
-/*   Updated: 2019/06/10 16:33:37 by mduma            ###   ########.fr       */
+/*   Created: 2019/05/31 10:50:32 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/08 15:50:12 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "stdlib.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *str1, const void *str2, size_t n)
 {
-	char	*tmp_dst;
-	char	*tmp_src;
-	size_t	count;
+	size_t			count;
+	unsigned char	*dest;
+	unsigned char	*src;
 
-	if (dst == src)
-		return (dst);
-	tmp_dst = (char *)dst;
-	tmp_src = (char *)src;
-	if (src < dst)
+	count = n;
+	src = (unsigned char *)str2;
+	dest = (unsigned char *)str1;
+	if (*dest == '\0' && *src == '\0')
+		return (0);
+	if (dest > src)
 	{
-		count = len;
-		while (count-- > 0)
-			tmp_dst[count] = tmp_src[count];
+		while (count--)
+		{
+			dest[count] = src[count];
+		}
 	}
 	else
 	{
-		count = 0;
-		while (count < len)
-		{
-			tmp_dst[count] = tmp_src[count];
-			count++;
-		}
+		dest = ft_memcpy(dest, src, count);
 	}
-	return (dst);
+	return (dest);
 }

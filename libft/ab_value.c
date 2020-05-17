@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdupdel.c                                     :+:      :+:    :+:   */
+/*   ab_value.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfernand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 09:44:51 by gfernand          #+#    #+#             */
-/*   Updated: 2019/07/12 14:50:12 by mduma            ###   ########.fr       */
+/*   Created: 2019/09/04 11:52:43 by omputle           #+#    #+#             */
+/*   Updated: 2019/09/04 11:54:20 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdupdel(char **str)
+int		ab_value(int num)
 {
-	char	*temp;
-
-	temp = ft_strdup(*str);
-	ft_strdel(str);
-	return (temp);
+	if (num < 0)
+		return (num * -1);
+	else
+		return (num);
 }

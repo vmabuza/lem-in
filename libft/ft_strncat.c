@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mduma <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 14:07:24 by mduma             #+#    #+#             */
-/*   Updated: 2019/06/10 12:46:34 by mduma            ###   ########.fr       */
+/*   Created: 2019/05/21 08:40:42 by omputle           #+#    #+#             */
+/*   Updated: 2019/05/24 10:46:56 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncat(char *s1, const char *s2, size_t n)
+char	*ft_strncat(char *restrict dest, const char *restrict src, size_t n)
 {
-	int		a;
-	size_t	b;
-	char	*str1;
-	char	*str2;
+	size_t	count;
+	size_t	len;
+	size_t	i;
 
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	str1 = (char*)s1;
-	str2 = (char*)s2;
-	a = 0;
-	b = 0;
-	while (str1[a] != '\0')
-		a++;
-	while (str2[b] != '\0' && b < n)
+	len = 0;
+	while (dest[len] != '\0')
 	{
-		str1[a + b] = str2[b];
-		b++;
+		len++;
 	}
-	str1[a + b] = '\0';
-	return (str1);
+	count = len;
+	i = 0;
+	while (count < (len + n) && src[i] != '\0')
+	{
+		dest[count] = src[i];
+		i++;
+		count++;
+	}
+	dest[count] = '\0';
+	return (dest);
 }

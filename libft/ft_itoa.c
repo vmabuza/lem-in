@@ -3,39 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mduma <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 11:42:17 by mduma             #+#    #+#             */
-/*   Updated: 2019/07/01 10:39:37 by mduma            ###   ########.fr       */
+/*   Created: 2019/06/27 16:33:08 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/27 17:06:21 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "stdlib.h"
 
-char	*ft_itoa(int n)
+static int		level(unsigned int nb)
 {
-	char	arr[12];
-	char	*a;
-	int		neg;
-	int		b;
-	int		c;
+	unsigned int	count;
 
-	c = 0;
-	b = 0;
-	neg = n < 0 ? -1 : 1;
-	while (neg * n > 9 || neg * n < 0)
+	count = 0;
+	while (nb >= 10)
 	{
-		arr[b++] = '0' + neg * (n % 10);
-		n = n / 10;
+		nb = nb / 10;
+		count++;
 	}
-	arr[b++] = '0' + neg * n;
-	if (neg < 0)
-		arr[b++] = '-';
-	if ((a = (char *)malloc(sizeof(char) * b + 1)) == NULL)
-		return (NULL);
-	a[b] = '\0';
-	while (b--)
-		a[b] = arr[c++];
-	return (a);
+	return (count + 1);
+}
+
+char			*ft_itoa(int n)
+{
+	char			*ans;
+	unsigned int	nbr;
+	unsigned int	count;
+	unsigned int	len;
+
+	if (n < 0)
+		nbr = (unsigned int)(-1 * n);
+	else
+		nbr = (unsigned int)n;
+	len = (unsigned int)level(nbr);
+	if (!(ans = (char*)malloc(sizeof(char) * (len + 1 + (n < 0 ? 1 : 0)))))
+		return (0);
+	if (n < 0 && (ans[0] = '-'))
+		len++;
+	count = len - 1;
+	while (nbr >= 10)
+	{
+		ans[count--] = (char)(nbr % 10 + 48);
+		nbr = nbr / 10;
+	}
+	ans[count] = (char)(nbr % 10 + 48);
+	ans[len] = '\0';
+	return (ans);
 }

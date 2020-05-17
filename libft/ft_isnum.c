@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mduma <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/22 17:31:39 by mduma             #+#    #+#             */
-/*   Updated: 2019/08/22 17:32:08 by mduma            ###   ########.fr       */
+/*   Created: 2019/08/29 15:20:40 by omputle           #+#    #+#             */
+/*   Updated: 2019/09/14 08:35:43 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isupper(int c)
+int		ft_isnum(char *str)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	return (0);
+	int	count;
+
+	count = 0;
+	if ((str[count] == '+' || str[count] == '-') && ft_strlen(str) > 1)
+		count++;
+	while (str[count] != '\0')
+	{
+		if (ft_isdigit(str[count]) == 0)
+			return (0);
+		count++;
+	}
+	return (1);
 }

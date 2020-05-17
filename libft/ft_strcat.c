@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mduma <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 14:05:33 by mduma             #+#    #+#             */
-/*   Updated: 2019/07/12 16:01:04 by mduma            ###   ########.fr       */
+/*   Created: 2019/05/20 16:34:44 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/24 16:39:40 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	int a;
-	int b;
+	int		len;
+	int		i;
 
-	a = 0;
-	while (s1[a] != '\0')
-		a++;
-	b = 0;
-	while (s2[b] != '\0')
+	len = 0;
+	i = 0;
+	while (s1[len] != '\0')
 	{
-		s1[a + b] = s2[b];
-		b++;
+		len++;
 	}
-	s1[a + b] = '\0';
+	while (s2[i] != '\0')
+	{
+		s1[len] = s2[i];
+		len++;
+		i++;
+	}
+	s1[len] = '\0';
 	return (s1);
 }

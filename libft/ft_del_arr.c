@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_array.c                                       :+:      :+:    :+:   */
+/*   ft_del_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmabuza <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/29 14:29:50 by vmabuza           #+#    #+#             */
-/*   Updated: 2020/01/29 14:29:53 by vmabuza          ###   ########.fr       */
+/*   Created: 2019/09/12 10:15:02 by omputle           #+#    #+#             */
+/*   Updated: 2019/09/14 10:48:47 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void	free_array(char **array, t_map *m, int error)
+void	ft_del_arr(char **arr)
 {
-	int i;
+	int		count;
 
-	i = 0;
-	while (array[i])
-		(array[i]) ? free(array[i++]) : 0;
-	free(array);
-	if (error)
-		exit_func(m, 1);
-	array = NULL;
+	count = 0;
+	while (arr[count] != NULL)
+	{
+		free(arr[count]);
+		arr[count] = NULL;
+		count++;
+	}
+	free(arr);
+	arr = NULL;
 }

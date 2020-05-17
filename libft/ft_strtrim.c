@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mduma <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: omputle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 14:57:57 by mduma             #+#    #+#             */
-/*   Updated: 2019/06/14 08:28:40 by mduma            ###   ########.fr       */
+/*   Created: 2019/06/05 09:01:53 by omputle           #+#    #+#             */
+/*   Updated: 2019/06/19 09:44:42 by omputle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 char	*ft_strtrim(char const *s)
 {
-	char	*s1;
-	char	*s1_new;
-	size_t	len;
+	size_t	start;
+	size_t	end;
 	size_t	count;
+	char	*str;
 
-	s1 = (char*)s;
-	if (!s1)
-		return (NULL);
-	while (*s1 == ' ' || *s1 == '\t' || *s1 == '\n')
-		s1++;
-	len = ft_strlen(s1) - 1;
-	if (ft_strlen(s1) == 0)
-		return (s1_new = ft_strnew(0));
-	while (s1[len] == ' ' || s1[len] == '\t' || s1[len] == '\n')
-		len--;
-	if (!(s1_new = ft_strnew(len + 1)))
-		return (NULL);
+	start = 0;
 	count = 0;
-	while (count <= len)
+	if (!s)
+		return (0);
+	while (s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
+		start++;
+	if (s[start] == '\0')
+		return ("");
+	end = ft_strlen(s) - 1;
+	while (s[end] == ' ' || s[end] == '\n' || s[end] == '\t')
+		end--;
+	if (!(str = (char *)malloc(sizeof(char) * (end - start + 2))))
+		return (0);
+	while ((start + count) <= end)
 	{
-		s1_new[count] = s1[count];
+		str[count] = s[start + count];
 		count++;
 	}
-	s1_new[count] = 0;
-	return (s1_new);
+	str[count] = '\0';
+	return (str);
 }
